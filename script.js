@@ -140,43 +140,47 @@ gsap.utils.toArray(Name).forEach((names) => {
 
 
 //accessories scroll box setting
-const pinned_col = document.querySelector('.left-col')
-const scroll_row = document.querySelector('.scroll-row')
-const scroll_img = document.querySelectorAll('.scroll-img')
+let mm = gsap.matchMedia();
 
-const scroll_img_array = gsap.utils.toArray(scroll_img)
+//desktop animation
+mm.add("(min-width: 992px)", () => {
+  const pinned_col = document.querySelector('.left-col')
+  const scroll_row = document.querySelector('.scroll-row')
+  const scroll_img = document.querySelectorAll('.scroll-img')
 
-const products = [
-  {
-    title: 'B E A N I E',
-    price: '$12.5',
-    rating: '★★★★☆',
-    review: '142'
-  },
-  {
-    title: 'W A L L E T',
-    price: '$23.0',
-    rating: '★★★☆☆',
-    review: '122'
-  },
-  {
-    title: "S H A D E S",
-    price: '$42.0',
-    rating: '★★★★½',
-    review: '190'
-  },
-  {
-    title: "C A P",
-    price: '$12.0',
-    rating: '★★★★☆',
-    review: '127'
-  }
-]
-const container = document.querySelector(".text-container");
-products.forEach(product => {
-  const div = document.createElement("div");
-  div.classList.add("scroll-content");
-  div.innerHTML = `
+  const scroll_img_array = gsap.utils.toArray(scroll_img)
+
+  const products = [
+    {
+      title: 'B E A N I E',
+      price: '$12.5',
+      rating: '★★★★☆',
+      review: '142'
+    },
+    {
+      title: 'W A L L E T',
+      price: '$23.0',
+      rating: '★★★☆☆',
+      review: '122'
+    },
+    {
+      title: "S H A D E S",
+      price: '$42.0',
+      rating: '★★★★½',
+      review: '190'
+    },
+    {
+      title: "C A P",
+      price: '$12.0',
+      rating: '★★★★☆',
+      review: '127'
+    }
+  ]
+  const container = document.querySelector(".text-container");
+  products.forEach(product => {
+    const div = document.createElement("div");
+    div.classList.add("scroll-content");
+    div.innerHTML = `
 
     <div class="title-row">
       <h1 class="scroll-content-font prod-title">${product.title}</h1>
@@ -189,155 +193,166 @@ products.forEach(product => {
 
   <h1 class="scroll-content-font text-end prod-rating">${product.rating}</h1> 
   <h1 class="scroll-content-font text-end " style="font-size:1.2rem; overflow:hidden">${product.review} <span class="prod-review">reviews</span></h1>`
-  container.appendChild(div);
-});
+    container.appendChild(div);
+  });
 
 
-const scroll_text = gsap.utils.toArray(document.querySelectorAll('.scroll-content'))
-const rating_text = gsap.utils.toArray(document.querySelectorAll('.prod-rating'))
-let current = 0
-let scrollSplit = []
-let ratingSplit = []
-scroll_text.forEach((el) => {
-  const scrollSplitSingle = SplitText.create(el, {
-    type: 'chars',
-    mask: 'words',
-    ignore: '.prod-rating, .prod-review'
+  const scroll_text = gsap.utils.toArray(document.querySelectorAll('.scroll-content'))
+  const rating_text = gsap.utils.toArray(document.querySelectorAll('.prod-rating'))
+  let current = 0
+  let scrollSplit = []
+  let ratingSplit = []
+  scroll_text.forEach((el) => {
+    const scrollSplitSingle = SplitText.create(el, {
+      type: 'chars',
+      mask: 'words',
+      ignore: '.prod-rating, .prod-review'
+    })
+    scrollSplit.push(scrollSplitSingle)
   })
-  scrollSplit.push(scrollSplitSingle)
-})
 
-rating_text.forEach((el) => {
-  const ratingSplitSingle = SplitText.create(el, {
-    type: 'chars'
+  rating_text.forEach((el) => {
+    const ratingSplitSingle = SplitText.create(el, {
+      type: 'chars'
+    })
+    ratingSplit.push(ratingSplitSingle)
   })
-  ratingSplit.push(ratingSplitSingle)
-})
 
 
-scrollSplit.slice(1).forEach((split) => {
-  gsap.set(split.chars, {
-    opacity: 0,
+  scrollSplit.slice(1).forEach((split) => {
+    gsap.set(split.chars, {
+      opacity: 0,
+    })
   })
-})
 
-ratingSplit.slice(1).forEach((split) => {
-  gsap.set(split.chars, {
+  ratingSplit.slice(1).forEach((split) => {
+    gsap.set(split.chars, {
+      opacity: 0
+    })
+  })
+
+  const scroll_line = gsap.utils.toArray(document.querySelectorAll('.scroll-line'))
+  const review_text = gsap.utils.toArray(document.querySelectorAll('.prod-review'))
+  gsap.set([scroll_line.slice(1), review_text.slice(1)], {
     opacity: 0
   })
-})
-
-const scroll_line = gsap.utils.toArray(document.querySelectorAll('.scroll-line'))
-const review_text = gsap.utils.toArray(document.querySelectorAll('.prod-review'))
-gsap.set([scroll_line.slice(1),review_text.slice(1)], {
-  opacity: 0
-})
 
 
-gsap.to(scroll_img, {
-  yPercent: -320,
-  ease: 'none',
-  scrollTrigger: {
-    trigger: scroll_row,
-    start: 'top top',
-    end: () => `+=${scroll_img_array.length * 1000}`,
-    scrub: 1,
-    pin: true,
-    anticipatePin: 1,
-    onUpdate: self => {
-      let progressAdj
-      if (self.direction > 0) {
-        progressAdj = Math.max(0, self.progress - 0.07);
-      }
-      else {
-        progressAdj = Math.max(0, self.progress + 0.07)
-      }
-      let index = Math.round(progressAdj * (scroll_img_array.length - 1))
-      index = Math.max(0, index)
-      const stl = gsap.timeline()
-      if (index !== current) {
-
-        if (window.activeTextTl) {
-          window.activeTextTl.kill()
+  gsap.to(scroll_img, {
+    yPercent: -320,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: scroll_row,
+      start: 'top top',
+      end: () => `+=${scroll_img_array.length * 1000}`,
+      scrub: 1,
+      pin: true,
+      anticipatePin: 1,
+      onUpdate: self => {
+        let progressAdj
+        if (self.direction > 0) {
+          progressAdj = Math.max(0, self.progress - 0.07);
         }
-        scrollSplit.forEach((split, i) => {
+        else {
+          progressAdj = Math.max(0, self.progress + 0.07)
+        }
+        let index = Math.round(progressAdj * (scroll_img_array.length - 1))
+        index = Math.max(0, index)
+        const stl = gsap.timeline()
+        if (index !== current) {
 
-          gsap.set(split.chars, {
-            opacity: i === current ? 1 : 0,
-            y: 0,
-            clearProps: "transform"
+          if (window.activeTextTl) {
+            window.activeTextTl.kill()
+          }
+          scrollSplit.forEach((split, i) => {
+
+            gsap.set(split.chars, {
+              opacity: i === current ? 1 : 0,
+              y: 0,
+              clearProps: "transform"
+            })
+
           })
 
-        })
-
-        ratingSplit.forEach((split, i) => {
-          gsap.set(split.chars, {
-            opacity: i === current ? 1 : 0,
-            y: 0,
-            clearProps: "transform"
+          ratingSplit.forEach((split, i) => {
+            gsap.set(split.chars, {
+              opacity: i === current ? 1 : 0,
+              y: 0,
+              clearProps: "transform"
+            })
           })
-        })
 
 
-        const stl = gsap.timeline({
-          defaults: {
-            overwrite: 'auto'
-          }
-        })
+          const stl = gsap.timeline({
+            defaults: {
+              overwrite: 'auto'
+            }
+          })
 
-        window.activeTextTl = stl
+          window.activeTextTl = stl
 
-        stl.to(scrollSplit[current].chars, {
-          y: 50,
-          opacity: 0,
-          duration: 0.5,
-          ease: 'power3.out',
-          stagger: 0.02
-        }, 0)
+          stl.to(scrollSplit[current].chars, {
+            y: 50,
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power3.out',
+            stagger: 0.02
+          }, 0)
 
-        stl.to(ratingSplit[current].chars, {
-          opacity: 0,
-          scale:0.5,
-          duration: 0.3,
-          ease: "back.out(2)"
-        }, 0)
-
-
-
-        gsap.set(scrollSplit[index].chars, {
-          y: -50,
-          opacity: 0
-        })
-        stl.to(scrollSplit[index].chars, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: 'power3.out',
-          stagger: {
-            each: 0.02,
-            from:'random'
-          }
-        }, 0.15)
+          stl.to(ratingSplit[current].chars, {
+            opacity: 0,
+            scale: 0.5,
+            duration: 0.3,
+            ease: "back.out(2)"
+          }, 0)
 
 
-        gsap.set(ratingSplit[index].chars, {
-          opacity: 0,
-          scale:0.5,
-        });
-        stl.to(ratingSplit[index].chars, {
-          opacity: 1,
-          stagger:0.08,
-          scale:1,
-          duration: 0.2,
-        }, 0.15);
 
-        current = index
+          gsap.set(scrollSplit[index].chars, {
+            y: -50,
+            opacity: 0
+          })
+          stl.to(scrollSplit[index].chars, {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power3.out',
+            stagger: {
+              each: 0.02,
+              from: 'random'
+            }
+          }, 0.15)
+
+
+          gsap.set(ratingSplit[index].chars, {
+            opacity: 0,
+            scale: 0.5,
+          });
+          stl.to(ratingSplit[index].chars, {
+            opacity: 1,
+            stagger: 0.08,
+            scale: 1,
+            duration: 0.2,
+          }, 0.15);
+
+          current = index
+        }
+
       }
 
     }
+  })
 
-  }
-})
+  return () => {
+    //for future use
+  };
+});
+
+//mobile animation
+mm.add("(max-width: 991px)", () => {
+
+});
+
 
 
 
