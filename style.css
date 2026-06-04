@@ -257,4 +257,24 @@
   gap: 0.5rem;
 }
 
+.mobile-scroll-background{
+  background-color: var(--color-cloud);
+  border-radius: 1rem;
+}
 
+.mobile-scroll-text, .mobile-scroll-text-review{
+  font-size: 1.4rem;
+  font-family: var(--font-mont);
+  color: black;
+  font-weight: 500;
+  display: block;
+  padding:0;
+  margin:0
+}
+
+.mobile-scroll-text-review{
+ font-size:0.8rem
+}
+
+.mobile-scroll-text-section{
+}

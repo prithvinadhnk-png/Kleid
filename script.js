@@ -182,17 +182,17 @@ mm.add("(min-width: 992px)", () => {
     div.classList.add("scroll-content");
     div.innerHTML = `
 
-    <div class="title-row">
+    <div class="title-row pe-5">
       <h1 class="scroll-content-font prod-title">${product.title}</h1>
       <h1 class="scroll-content-font prod-divider">|</h1>
       <h1 class="scroll-content-font prod-price">${product.price}</h1>
     </div>
-    <hr class='scroll-line m-0 p-0'>
+    <hr class='scroll-line m-0 mx-5 p-0 '>
 
 
 
-  <h1 class="scroll-content-font text-end prod-rating">${product.rating}</h1> 
-  <h1 class="scroll-content-font text-end " style="font-size:1.2rem; overflow:hidden">${product.review} <span class="prod-review">reviews</span></h1>`
+  <h1 class="scroll-content-font text-end prod-rating pe-5">${product.rating}</h1> 
+  <h1 class="scroll-content-font text-end pe-5" style="font-size:1.2rem; overflow:hidden">${product.review} <span class="prod-review">reviews</span></h1>`
     container.appendChild(div);
   });
 
