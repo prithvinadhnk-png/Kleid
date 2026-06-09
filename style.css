@@ -100,7 +100,7 @@
     /* stretches wave horizontally */
     height: 120px;
   }
-  
+
 }
 
 .wave-top path {
@@ -110,10 +110,7 @@
 
 .third-section {
   position: relative;
-  
-  /* 4. Optional: Opacity control (see tip below) */
   color: var(--color-cloud);
-  /* padding-top: clamp(5.938rem, 5.197rem + 3.947vw, 8.75rem); */
 }
 
 
@@ -182,8 +179,8 @@
   display: inline-block;
 }
 
-.access-image{
-  z-index:5
+.access-image {
+  z-index: 5
 }
 
 .text-exclusive {
@@ -201,80 +198,101 @@
 
 
 
-.left-col,.right-col{
-  height:100dvh;
-  position:relative;
+.left-col,
+.right-col {
+  height: 100dvh;
+  position: relative;
 }
 
-.right-col{
+.right-col {
   overflow: hidden;
 }
 
 
-.scroll-img{
-  height:100dvh;
+.scroll-img {
+  height: 100dvh;
   display: flex;
   align-items: center;
   will-change: transform;
   justify-content: center;
 }
-.scroll-row{
-  height:100dvh;
-  
+
+.scroll-row {
+  height: 100dvh;
+
 }
 
 
-.scroll-content-font{
+.scroll-content-font {
   font-family: var(--font-mont);
 }
 
-.scroll-img{
+.scroll-img {
   background-color: var(--color-cloud);
   border-radius: 1rem;
-  margin:2rem
+  margin: 2rem
 }
 
-.scroll-content{
-  position:absolute;
-  overflow:hidden;
+.scroll-content {
+  position: absolute;
+  overflow: hidden;
 
-  top:50%;
-  left:50%;
+  top: 50%;
+  left: 50%;
 
-  transform:translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 
-  width:max-content;
+  width: max-content;
 }
 
 .title-row {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  justify-content:end;
-  width:70vh;
-  position:relative;
-  overflow:hidden;
+  justify-content: end;
+  width: 70vh;
+  position: relative;
+  overflow: hidden;
   gap: 0.5rem;
 }
 
-.mobile-scroll-background{
+.mobile-scroll-background {
   background-color: var(--color-cloud);
   border-radius: 1rem;
 }
 
-.mobile-scroll-text, .mobile-scroll-text-review{
-  font-size: 1.4rem;
+.mobile-scroll-text,
+.mobile-scroll-text-review {
+  font-size: clamp(1rem, 0.737rem + 1.404vw, 2rem);
   font-family: var(--font-mont);
   color: black;
   font-weight: 500;
   display: block;
-  padding:0;
-  margin:0
+  padding: 0;
+  margin: 0
 }
 
-.mobile-scroll-text-review{
- font-size:0.8rem
+.mobile-scroll-text-review {
+  font-size: clamp(0.6rem, 0.495rem + 0.561vw, 1rem);
 }
 
-.mobile-scroll-text-section{
+.img-card {
+  position: relative;
+}
+
+#prod-name-price,
+#prod-rating,
+#prod-review {
+  display: inline-block;
+}
+
+
+.mobile-scroll-text-section {
+  position: relative;
+
+}
+
+.fourth-section{
+  position:relative;
+  background-color: var(--color-cloud);
 }

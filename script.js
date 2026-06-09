@@ -31,23 +31,23 @@ tl.from(split.chars, {
   }, "<")
 
 //wave animation
-// const wavepath = document.querySelectorAll('#wavePath');
+const wavepath = document.querySelectorAll('#wavePath');
 
-// gsap.to(wavepath, {
-//   duration: 5,
-//   repeat: -1,
-//   yoyo: true,
-//   ease: "sine.inOut",
-//   attr: {
-//     d: (index) => {
-//       if (index === 0) {
-//         return "M0,0 L0,80 C240,20 480,120 720,70 C960,20 1200,120 1440,60 L1440,0 Z";
-//       } else {
-//         return "M0,120 L0,40 C240,100 480,0 720,50 C960,100 1200,0 1440,60 L1440,120 Z";
-//       }
-//     }
-//   }
-// });
+gsap.to(wavepath, {
+  duration: 2.5,
+  repeat: -1,
+  yoyo: true,
+  ease: "sine.inOut",
+  attr: {
+    d: (index) => {
+      if (index === 0) {
+        return "M0,0 L0,80 C240,20 480,120 720,70 C960,20 1200,120 1440,60 L1440,0 Z";
+      } else {
+        return "M0,120 L0,40 C240,100 480,0 720,50 C960,100 1200,0 1440,60 L1440,120 Z";
+      }
+    }
+  }
+});
 
 
 //second-section-text animation
@@ -350,7 +350,132 @@ mm.add("(min-width: 992px)", () => {
 
 //mobile animation
 mm.add("(max-width: 991px)", () => {
+  let current = 0;
 
+  const image = document.getElementById('prod-img')
+  const title = document.getElementById('prod-name-price')
+  const rating = document.getElementById('prod-rating')
+  const review = document.getElementById('prod-review')
+  const mobile_scroll_background = document.querySelector('.mobile-scroll-background')
+
+  gsap.from(mobile_scroll_background, {
+    durataion: 3,
+    opacity:0,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: mobile_scroll_background,
+      start: "top 50%",
+    }
+
+  })
+
+
+
+  const images = ['Beanie Mockup Floating.png', '—Pngtree—wallet isolated accessory_13697902.png', 'shades.png', 'base_ball_cap.png']
+  const products = [{
+    title: 'B E A N I E | $12.5',
+    rating: '★★★★☆',
+    review: '142'
+  },
+  {
+    title: 'W A L L E T | $23.0',
+    rating: '★★★☆☆',
+    review: '122'
+  },
+  {
+    title: "S H A D E S | $42.",
+    rating: '★★★★½',
+    review: '190'
+  },
+  {
+    title: "C A P | $12.0",
+    rating: '★★★★☆',
+    review: '127'
+  }]
+  function changeContent(direction) {
+    const next = direction === 'next'
+      ? (current + 1) % images.length
+      : (current - 1 + images.length) % images.length;
+
+    const ratingSplit = SplitText.create(rating, {
+      type: 'chars',
+      mask: 'words'
+    })
+
+
+    const mobiletl = gsap.timeline()
+
+    mobiletl.to(image, {
+      x: direction === 'next' ? -150 : 150,
+      opacity: 0,
+      filter: 'blur(20px)',
+      duration: 0.2,
+      scale: 0.8,
+      ease: 'power2.out'
+    })
+
+    mobiletl.to([title], {
+      x: 70,
+      opacity: 0,
+      duration: 0.2,
+    }, '<')
+
+    mobiletl.to(ratingSplit.chars, {
+      opacity: 0,
+      stagger: 0.03,
+      duration: 0.2,
+    }, '<')
+
+    mobiletl.call(() => {
+
+      image.src = 'images/clothes/' + images[next]
+      title.textContent = products[next].title
+      ratingSplit.chars.textContent = products[next].rating
+      review.textContent = products[next].review
+
+      gsap.set(image, {
+        x: direction === 'next' ? 150 : -150,
+      })
+
+      gsap.set([title], {
+        x: -70
+      })
+
+
+
+
+      current = next
+    })
+
+    mobiletl.to(image, {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      filter: 'blur(0px)',
+      duration: 0.2,
+      ease: 'power2.out'
+    })
+    mobiletl.to([title], {
+      x: 0,
+      ease: 'power2.out',
+      duration: 0.2,
+      opacity: 1
+    }, '<')
+    mobiletl.to(ratingSplit.chars, {
+      opacity: 1,
+      stagger: 0.03,
+      duration: 0.2,
+    }, '<')
+
+  }
+
+
+  document.getElementById('next').addEventListener('click', () => {
+    changeContent('next')
+  })
+  document.getElementById('prev').addEventListener('click', () => {
+    changeContent('prev')
+  })
 });
 
 
