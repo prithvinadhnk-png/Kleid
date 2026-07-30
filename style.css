@@ -84,14 +84,14 @@
   transform: translateX(-50%);
 }
 
-.wave-bottom {
-  position: absolute;
-  bottom: -1px;
-  left: 50%;
-  z-index: 99;
-  width: 120%;
+.fill-section{
   height: clamp(100px, 12vw, 160px);
-  transform: translateX(-50%);
+  background-color: var(--color-cloud);
+  width: 100%;
+  position:relative;
+  padding: 0px;
+  margin: 0px;
+
 }
 
 @media (max-width: 600px) {
@@ -104,13 +104,14 @@
 }
 
 .wave-top path {
-  fill: black;
+  fill: rgb(0, 0, 0);
   /* same as first section */
 }
 
 .third-section {
   position: relative;
-  color: var(--color-cloud);
+  background-color: var(--color-cloud);
+  color: black;
 }
 
 
@@ -192,9 +193,23 @@
   font-size: clamp(2.3rem, 0.274rem + 10.807vw, 10rem);
   font-family: var(--font-mont);
   font-weight: 800;
-  line-height: clamp(2.5rem, 0.842rem + 8.842vw, 8.8rem);
-  color: rgb(41, 41, 41);
+  line-height: 0.9;
+  background: linear-gradient(
+    -60deg,
+    #3d3d3d 0%,
+    #3d3d3d 40%,
+    rgb(151, 151, 151) 50%,
+    #3d3d3d 60%,
+    #3d3d3d 100%
+  );
+
+  background-size: 200% auto;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color:transparent
 }
+
 
 
 
@@ -228,8 +243,9 @@
 }
 
 .scroll-img {
-  background-color: var(--color-cloud);
-  border-radius: 1rem;
+  
+  border: 2.5px black solid;
+  border-radius: 0.8rem;
   margin: 2rem
 }
 
@@ -295,4 +311,62 @@
 .fourth-section{
   position:relative;
   background-color: var(--color-cloud);
+}
+
+.font-category{
+  font-family:var(--font-mont);
+  color:rgb(255, 255, 255);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.category-men {
+  background-image: url('images/Category/menCate.png'); 
+
+  background-repeat: no-repeat; 
+
+  background-position: center; 
+
+  background-size: cover; 
+
+}
+
+.category-women {
+  background-image: url('images/Category/womenCate.png'); 
+
+  background-repeat: no-repeat; 
+
+  background-position: center; 
+
+  background-size: cover; 
+
+}
+
+.category-accessories{
+  background-image: url('images/Category/accessCate.png'); 
+
+  background-repeat: no-repeat; 
+
+  background-position: center; 
+
+  background-size: cover; 
+
+}
+
+.font-newsletter{
+  font-family:var(--font-title);
+  color:rgb(255, 255, 255);
+  font-size: 3rem;
+}
+
+.subscribe-name{
+  background-color: rgb(0, 0, 0);
+  height: 2.5rem;
+  color:white;
+  border: black 0.1rem solid;
+  border-radius: 0.2rem;
+}
+
+.subscribe-name::placeholder{
+  color:var(--color-cloud)
 }

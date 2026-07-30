@@ -113,30 +113,25 @@ gsap.utils.toArray(Name).forEach((names) => {
   })
 })
 
-//accessories section text animation
-// const access_text = document.querySelector(".access-anime");
-// const third_section = document.querySelector('.third-section')
-// const access_split = SplitText.create(access_text, {
-//   type: "chars",
-//   mask: 'chars'
 
-// })
-// gsap.from(access_split.chars, {
-//   mask: true,
-//   y: 150,
-//   duration: 1,
-//   ease: 'power4',
-//   stagger: {
-//     each: 0.05,
-//     from: 'random',
-
-//   },
-//   scrollTrigger: {
-//     trigger: third_section,
-//     start: "top 80%",
-//     toggleActions: "play none none none"
-//   }
-// })
+//shine text animation for shop by category
+const sbc_heading = document.querySelector(".one_liner");
+const sbc_section = document.querySelector(".shop-by-category")
+gsap.from(sbc_heading,{
+  opacity:0,
+  duration:1,
+  scrollTrigger:{
+    trigger:sbc_section,
+    start: 'top 70%',
+    toggleActions:'play none none none'
+  }
+})
+gsap.to(sbc_heading, {
+    backgroundPosition: "-200% center",
+    duration: 2,
+    ease: "none",
+    repeat: -1
+  });
 
 
 //accessories scroll box setting
@@ -246,6 +241,7 @@ mm.add("(min-width: 992px)", () => {
       start: 'top top',
       end: () => `+=${scroll_img_array.length * 1000}`,
       scrub: 1,
+      pinSpacing:true,
       pin: true,
       anticipatePin: 1,
       onUpdate: self => {
