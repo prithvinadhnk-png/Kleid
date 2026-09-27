@@ -482,7 +482,7 @@ mm.add("(max-width: 991px)", () => {
 
 //strip animation
 const track = document.querySelector(".ticker-track");
-const words = ["Dumb ", "Ape ", "fr. "];
+const words = ["Wear ", "Your ", "Story. "];
 let i;
 for (i = 0; i < 25; i++) {
   words.forEach(word => {
